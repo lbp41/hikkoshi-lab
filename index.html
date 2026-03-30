@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>引っ越し料金診断｜あなたの条件で最安をチェック</title>
+<title>引っ越し費用チェック｜30秒で料金の目安がわかる</title>
 
-<meta name="description" content="引っ越し料金を簡単診断。単身・家族・距離別に最安の業者をチェックできます。">
-<meta name="keywords" content="引っ越し,見積もり,料金,比較">
+<meta name="description" content="引っ越し費用を30秒でチェック。条件別に最安の目安がわかります。知らないと損するポイントも解説。">
+<meta name="keywords" content="引っ越し,費用,見積もり,料金,比較">
 
-<meta property="og:title" content="引っ越し料金診断">
-<meta property="og:description" content="条件別に最安をチェック">
+<meta property="og:title" content="引っ越し費用チェック">
+<meta property="og:description" content="30秒で料金の目安がわかる">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://lbp41.github.io/hikkoshi-lab/">
 
@@ -19,7 +19,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background: #f0f2f5;
   margin: 0;
-  padding: 0;
 }
 
 .container {
@@ -35,14 +34,31 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-.top-link {
-  font-size: 14px;
-  margin-bottom: 16px;
+h1 {
+  font-size: 20px;
+  margin-bottom: 4px;
 }
 
-.top-link a {
+.sub {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.guide {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.guide a {
   color: #ff6b6b;
   text-decoration: none;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 6px;
 }
 
 .progress {
@@ -50,7 +66,6 @@ body {
   background: #eee;
   border-radius: 4px;
   margin-bottom: 20px;
-  overflow: hidden;
 }
 
 .progress-bar {
@@ -61,8 +76,8 @@ body {
 }
 
 h2 {
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-size: 18px;
+  margin-bottom: 14px;
 }
 
 button {
@@ -74,8 +89,8 @@ button {
   font-size: 16px;
   background: #ff6b6b;
   color: white;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
 }
 
 button:hover {
@@ -111,15 +126,16 @@ button:hover {
 <body>
 
 <div class="container">
-    <h1 style="font-size:18px; margin-bottom:10px;">
-        引っ越し料金診断
-    </h1>
 <div class="card">
 
-<!-- 上部リンク（審査対策） -->
-<div class="top-link">
-  <a href="guide.html">引っ越しで損しないためのポイントを見る</a>
+<h1>引っ越し費用チェック</h1>
+<p class="sub">30秒であなたの費用目安がわかります</p>
+
+<div class="guide">
+  <a href="guide.html">診断前にチェック｜引っ越しで3万円損しないポイント</a>
 </div>
+
+<p id="stepText" class="progress-text">ステップ 1 / 3</p>
 
 <div class="progress">
   <div id="progress" class="progress-bar"></div>
@@ -127,14 +143,14 @@ button:hover {
 
 <!-- Q1 -->
 <div id="q1">
-  <h2>あなたの引っ越しは？</h2>
+  <h2>引っ越しタイプを選択してください</h2>
   <button onclick="next()">単身</button>
   <button onclick="next()">家族</button>
 </div>
 
 <!-- Q2 -->
 <div id="q2" class="hidden">
-  <h2>荷物量は？</h2>
+  <h2>荷物の量を教えてください</h2>
   <button onclick="next()">少ない</button>
   <button onclick="next()">普通</button>
   <button onclick="next()">多い</button>
@@ -142,7 +158,7 @@ button:hover {
 
 <!-- Q3 -->
 <div id="q3" class="hidden">
-  <h2>距離は？</h2>
+  <h2>移動距離はどのくらいですか？</h2>
   <button onclick="showResult()">同じ市内</button>
   <button onclick="showResult()">県内</button>
   <button onclick="showResult()">長距離</button>
@@ -151,16 +167,15 @@ button:hover {
 <!-- RESULT -->
 <div id="result" class="hidden result">
 
-  <!-- 結果前リンク（信頼補強） -->
   <p style="font-size:14px;">
-    <a href="guide.html">→ 引っ越しの注意点を見る</a>
+    <a href="guide.html">→ 引っ越しの注意点を確認する</a>
   </p>
 
-  <h2>診断結果</h2>
+  <h2>あなたの引っ越し費用の目安</h2>
 
   <p>
-    あなたの条件だと<br>
-    <strong>平均2〜5万円の差が出る可能性があります</strong>
+    条件から見ると<br>
+    <strong>2〜5万円以上の差が出る可能性があります</strong>
   </p>
 
   <p>
@@ -175,7 +190,6 @@ button:hover {
 
 </div>
 
-<!-- フッター -->
 <div class="footer">
   <p><a href="privacy.html">プライバシーポリシー</a></p>
   <p><a href="about.html">運営者情報</a></p>
@@ -192,7 +206,7 @@ function next() {
   step++;
   document.getElementById("q" + step).classList.remove("hidden");
 
-  updateProgress();
+  updateUI();
 }
 
 function showResult() {
@@ -200,13 +214,22 @@ function showResult() {
   document.getElementById("result").classList.remove("hidden");
 
   document.getElementById("progress").style.width = "100%";
+  document.getElementById("stepText").innerText = "完了";
 }
 
-function updateProgress() {
+function updateUI() {
   const progress = document.getElementById("progress");
+  const stepText = document.getElementById("stepText");
 
-  if (step === 2) progress.style.width = "66%";
-  if (step === 3) progress.style.width = "100%";
+  if (step === 2) {
+    progress.style.width = "66%";
+    stepText.innerText = "ステップ 2 / 3";
+  }
+
+  if (step === 3) {
+    progress.style.width = "100%";
+    stepText.innerText = "ステップ 3 / 3";
+  }
 }
 </script>
 
