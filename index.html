@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>引っ越し診断</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 420px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.progress {
+  height: 6px;
+  background: #eee;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 33%;
+  background: #ff6b6b;
+  transition: 0.3s;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #ff6b6b;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.95;
+}
+
+.hidden {
+  display: none;
+}
+
+.result {
+  text-align: center;
+}
+
+.result strong {
+  color: #ff3b3b;
+  font-size: 18px;
+}
+
+.cta {
+  margin-top: 20px;
+}
+
+.cta button {
+  background: #ff3b3b;
+  font-size: 18px;
+  padding: 18px;
+}
+
+.badge {
+  display: inline-block;
+  background: #ffeaea;
+  color: #ff3b3b;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="progress">
+  <div id="progress" class="progress-bar"></div>
+</div>
+
+<!-- Q1 -->
+<div id="q1">
+  <span class="badge">30秒で完了</span>
+  <h2>あなたの引っ越しは？</h2>
+  <button onclick="next()">単身</button>
+  <button onclick="next()">家族</button>
+</div>
+
+<!-- Q2 -->
+<div id="q2" class="hidden">
+  <h2>荷物量は？</h2>
+  <button onclick="next()">少ない</button>
+  <button onclick="next()">普通</button>
+  <button onclick="next()">多い</button>
+</div>
+
+<!-- Q3 -->
+<div id="q3" class="hidden">
+  <h2>距離は？</h2>
+  <button onclick="showResult()">同じ市内</button>
+  <button onclick="showResult()">県内</button>
+  <button onclick="showResult()">長距離</button>
+</div>
+
+<!-- RESULT -->
+<div id="result" class="hidden result">
+  <h2>診断結果</h2>
+
+  <p>
+    あなたの条件だと<br>
+    <strong>平均2〜5万円の差が出る可能性があります</strong>
+  </p>
+
+  <p>
+    同じ条件でも業者ごとに料金が大きく変わります
+  </p>
+
+  <div class="cta">
+    <a href="ここにアフィリンク" target="_blank">
+      <button>無料で最安の見積もりを確認する</button>
+    </a>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+let step = 1;
+
+function next() {
+  document.getElementById("q" + step).classList.add("hidden");
+  step++;
+  document.getElementById("q" + step).classList.remove("hidden");
+
+  updateProgress();
+}
+
+function showResult() {
+  document.getElementById("q3").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("progress").style.width = "100%";
+}
+
+function updateProgress() {
+  const progress = document.getElementById("progress");
+
+  if (step === 2) progress.style.width = "66%";
+  if (step === 3) progress.style.width = "100%";
+}
+</script>
+
+</body>
+</html>
